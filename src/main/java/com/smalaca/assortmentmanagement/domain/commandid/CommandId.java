@@ -1,4 +1,4 @@
-package com.smalaca.bankaccountmanagemnt.domain.commandid;
+package com.smalaca.assortmentmanagement.domain.commandid;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

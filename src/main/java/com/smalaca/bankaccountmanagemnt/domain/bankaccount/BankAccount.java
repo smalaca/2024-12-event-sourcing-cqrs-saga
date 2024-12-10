@@ -9,7 +9,7 @@ public class BankAccount {
     private UUID bankAccountId;
     private UUID ownerId;
     // account number - business identifier
-    private UUID accountNumber;
+    private String accountNumber;
     private int balance;
 
     public void listen(BankAccountCreated event) {

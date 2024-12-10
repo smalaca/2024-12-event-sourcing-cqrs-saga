@@ -5,6 +5,7 @@ import com.smalaca.bankaccountmanagemnt.domain.bankaccount.command.CreateBankAcc
 import com.smalaca.bankaccountmanagemnt.infrastructure.repository.inmemory.bankaccount.InMemoryBankAccountRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,7 +24,7 @@ public class BankAccountRestController {
     }
 
     @PostMapping
-    public UUID create(CreateBankAccountCommand command) {
+    public UUID create(@RequestBody CreateBankAccountCommand command) {
         return bankAccountService.create(command);
     }
 

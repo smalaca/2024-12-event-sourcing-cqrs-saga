@@ -21,6 +21,6 @@ public class InMemoryEventRegistry implements EventRegistry {
 
     @Override
     public void publish(MoneyDeposited event) {
-
+        repository.save(event);
     }
 }

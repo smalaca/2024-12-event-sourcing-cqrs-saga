@@ -14,6 +14,7 @@ public record BankAccountCreated(EventId eventId, UUID bankAccountId, UUID owner
 
     @Override
     public void visit(BankAccount bankAccount) {
+        System.out.println(getClass().getName());
         bankAccount.listen(this);
     }
 }

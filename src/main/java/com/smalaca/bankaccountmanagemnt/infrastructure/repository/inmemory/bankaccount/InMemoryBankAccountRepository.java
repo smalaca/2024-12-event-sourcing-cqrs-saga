@@ -17,9 +17,11 @@ public class InMemoryBankAccountRepository implements BankAccountRepository {
     private final Map<UUID, List<BankAccountEvent>> bankAccounts = new HashMap<>();
 
     public void save(BankAccountEvent event) {
-        List<BankAccountEvent> events = new ArrayList<>();
-        events.add(event);
-        bankAccounts.put(event.bankAccountId(), events);
+        if (!bankAccounts.containsKey(event.bankAccountId())) {
+            bankAccounts.put(event.bankAccountId(), new ArrayList<>());
+        }
+
+        bankAccounts.get(event.bankAccountId()).add(event);
     }
 
     public Map<UUID, List<BankAccountEvent>> findAll() {
@@ -31,10 +33,12 @@ public class InMemoryBankAccountRepository implements BankAccountRepository {
         BankAccount bankAccount = new BankAccount();
         bankAccounts.get(bankAccountId).stream()
                 .sorted(Comparator.comparing(BankAccountEvent::creationDateTime))
-                .forEach(event -> {
-                    event.visit(bankAccount);
-                });
+                .forEach(event -> event.visit(bankAccount));
 
         return bankAccount;
+    }
+
+    public List<BankAccountEvent> findAllFor(UUID bankAccountId) {
+        return bankAccounts.get(bankAccountId);
     }
 }

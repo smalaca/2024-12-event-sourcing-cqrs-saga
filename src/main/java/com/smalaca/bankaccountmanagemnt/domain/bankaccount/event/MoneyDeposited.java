@@ -14,6 +14,7 @@ public record MoneyDeposited(EventId eventId, UUID bankAccountId, int balance, i
 
     @Override
     public void visit(BankAccount bankAccount) {
+        System.out.println(getClass().getName());
         bankAccount.listen(this);
     }
 }

@@ -37,4 +37,8 @@ public class BankAccount {
         listen(event);
         return event;
     }
+
+    public BankAccountDto asDto() {
+        return new BankAccountDto(bankAccountId, ownerId, accountNumber, balance);
+    }
 }

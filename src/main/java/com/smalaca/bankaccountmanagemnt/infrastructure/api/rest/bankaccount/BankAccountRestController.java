@@ -25,7 +25,7 @@ public class BankAccountRestController {
 
     @PostMapping
     public UUID create(@RequestBody CreateBankAccountCommand command) {
-        return bankAccountService.create(command);
+        return bankAccountService.handle(command);
     }
 
     @GetMapping("events")

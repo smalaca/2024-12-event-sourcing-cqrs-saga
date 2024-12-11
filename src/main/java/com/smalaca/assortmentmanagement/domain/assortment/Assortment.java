@@ -48,7 +48,8 @@ public class Assortment {
     public void listen(ProductAddedEvent event) {
         Price price = Price.of(event.price());
         Product product = new Product(event.productId(), event.productIdentifier(), event.name(), price);
-        AssortmentItem products = new AssortmentItem(product, event.quantity());
+        Quantity quantity = Quantity.of(event.quantity());
+        AssortmentItem products = new AssortmentItem(product, quantity);
 
         this.products.put(event.productId(), products);
     }

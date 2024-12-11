@@ -36,7 +36,7 @@ public class AssortmentService {
     public void handle(AddProductCommand command) {
         Assortment assortment = assortmentRepository.findBy(command.assortmentId());
 
-        ProductAddedEvent event = assortment.handle(command);
+        ProductAddedEvent event = assortment.addProduct(command);
 
         eventRegistry.publish(event);
     }
@@ -44,7 +44,7 @@ public class AssortmentService {
     public void handle(ChangeProductPriceCommand command) {
         Assortment assortment = assortmentRepository.findBy(command.assortmentId());
 
-        ProductPriceChangedEvent event = assortment.handle(command);
+        ProductPriceChangedEvent event = assortment.changeProductPrice(command);
 
         eventRegistry.publish(event);
     }

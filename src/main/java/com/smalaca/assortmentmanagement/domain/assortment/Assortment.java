@@ -25,7 +25,7 @@ public class Assortment {
         description = event.description();
     }
 
-    public ProductAddedEvent handle(AddProductCommand command) {
+    public ProductAddedEvent addProduct(AddProductCommand command) {
         ProductAddedEvent event = new ProductAddedEvent(
                 EventId.nextAfter(command.commandId()),
                 assortmentId,
@@ -54,7 +54,7 @@ public class Assortment {
         this.products.put(event.productId(), products);
     }
 
-    public ProductPriceChangedEvent handle(ChangeProductPriceCommand command) {
+    public ProductPriceChangedEvent changeProductPrice(ChangeProductPriceCommand command) {
         ProductPriceChangedEvent event = new ProductPriceChangedEvent(
                 EventId.nextAfter(command.commandId()),
                 assortmentId,

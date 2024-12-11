@@ -99,19 +99,11 @@ public class Assortment {
 
     public AssortmentEvent sellProduct(SellProductCommand command) {
         if (hasEnoughProduct(command)) {
-            ProductSoldEvent event = new ProductSoldEvent(
-                    EventId.nextAfter(command.commandId()),
-                    assortmentId,
-                    command.productId(),
-                    command.quantity());
+            ProductSoldEvent event = ProductSoldEvent.create(command, assortmentId);
             listen(event);
             return event;
         } else {
-            ProductNotFoundEvent event = new ProductNotFoundEvent(
-                    EventId.nextAfter(command.commandId()),
-                    assortmentId,
-                    command.productId(),
-                    command.quantity());
+            ProductNotFoundEvent event = ProductNotFoundEvent.create(command, assortmentId);
             listen(event);
             return event;
         }

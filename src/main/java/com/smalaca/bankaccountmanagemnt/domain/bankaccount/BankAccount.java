@@ -6,6 +6,7 @@ import com.smalaca.bankaccountmanagemnt.domain.bankaccount.event.BankAccountCrea
 import com.smalaca.bankaccountmanagemnt.domain.bankaccount.event.BankAccountEvent;
 import com.smalaca.bankaccountmanagemnt.domain.bankaccount.event.MoneyDepositedEvent;
 import com.smalaca.bankaccountmanagemnt.domain.bankaccount.event.MoneyWithdrawnEvent;
+import com.smalaca.bankaccountmanagemnt.domain.bankaccount.event.NotEnoughMoneyRecognizedEvent;
 import com.smalaca.bankaccountmanagemnt.domain.eventid.EventId;
 
 import java.util.UUID;

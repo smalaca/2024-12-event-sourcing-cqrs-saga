@@ -1,6 +1,6 @@
-package com.smalaca.bankaccountmanagemnt.domain.bankaccount;
+package com.smalaca.bankaccountmanagemnt.domain.bankaccount.event;
 
-import com.smalaca.bankaccountmanagemnt.domain.bankaccount.event.BankAccountEvent;
+import com.smalaca.bankaccountmanagemnt.domain.bankaccount.BankAccount;
 import com.smalaca.bankaccountmanagemnt.domain.eventid.EventId;
 
 import java.time.LocalDateTime;

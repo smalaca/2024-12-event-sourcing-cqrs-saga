@@ -6,8 +6,10 @@ import com.smalaca.assortmentmanagement.domain.assortment.AssortmentFactory;
 import com.smalaca.assortmentmanagement.domain.assortment.AssortmentRepository;
 import com.smalaca.assortmentmanagement.domain.assortment.command.AddAssortmentCommand;
 import com.smalaca.assortmentmanagement.domain.assortment.command.AddProductCommand;
+import com.smalaca.assortmentmanagement.domain.assortment.command.ChangeProductPriceCommand;
 import com.smalaca.assortmentmanagement.domain.assortment.event.AssortmentAdded;
 import com.smalaca.assortmentmanagement.domain.assortment.event.ProductAddedEvent;
+import com.smalaca.assortmentmanagement.domain.assortment.event.ProductPriceChangedEvent;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -35,6 +37,14 @@ public class AssortmentService {
         Assortment assortment = assortmentRepository.findBy(command.assortmentId());
 
         ProductAddedEvent event = assortment.handle(command);
+
+        eventRegistry.publish(event);
+    }
+
+    public void handle(ChangeProductPriceCommand command) {
+        Assortment assortment = assortmentRepository.findBy(command.assortmentId());
+
+        ProductPriceChangedEvent event = assortment.handle(command);
 
         eventRegistry.publish(event);
     }

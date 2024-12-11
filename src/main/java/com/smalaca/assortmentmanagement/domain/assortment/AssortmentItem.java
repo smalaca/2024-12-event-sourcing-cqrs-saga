@@ -8,4 +8,12 @@ class AssortmentItem {
         this.product = product;
         this.quantity = quantity;
     }
+
+    int price() {
+        return product.price();
+    }
+
+    void changePrice(int price) {
+        product.changePrice(price);
+    }
 }

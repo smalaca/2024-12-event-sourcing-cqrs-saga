@@ -1,8 +1,10 @@
 package com.smalaca.assortmentmanagement.domain.assortment;
 
 import com.smalaca.assortmentmanagement.domain.assortment.command.AddProductCommand;
+import com.smalaca.assortmentmanagement.domain.assortment.command.ChangeProductPriceCommand;
 import com.smalaca.assortmentmanagement.domain.assortment.event.AssortmentAdded;
 import com.smalaca.assortmentmanagement.domain.assortment.event.ProductAddedEvent;
+import com.smalaca.assortmentmanagement.domain.assortment.event.ProductPriceChangedEvent;
 import com.smalaca.assortmentmanagement.domain.eventid.EventId;
 
 import java.util.HashMap;
@@ -48,5 +50,28 @@ public class Assortment {
         AssortmentItem products = new AssortmentItem(product, event.quantity());
 
         this.products.put(event.productId(), products);
+    }
+
+    public ProductPriceChangedEvent handle(ChangeProductPriceCommand command) {
+        ProductPriceChangedEvent event = new ProductPriceChangedEvent(
+                EventId.nextAfter(command.commandId()),
+                assortmentId,
+                command.productId(),
+                findItemBy(command.productId()).price(),
+                command.price()
+        );
+
+        listen(event);
+
+        return event;
+    }
+
+    public void listen(ProductPriceChangedEvent event) {
+        AssortmentItem item = findItemBy(event.productId());
+        item.changePrice(event.newPrice());
+    }
+
+    private AssortmentItem findItemBy(UUID productId) {
+        return products.get(productId);
     }
 }

@@ -6,7 +6,7 @@ import com.smalaca.assortmentmanagement.domain.eventid.EventId;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public record AssortmentAdded(EventId eventId, UUID assortmentId, UUID sellerId, String name, String description) implements AssortmentEvent {
+public record ProductAddedEvent(EventId eventId, UUID assortmentId, UUID productId, String productIdentifier, String name, int price, int quantity) implements AssortmentEvent {
     @Override
     public LocalDateTime creationDateTime() {
         return eventId().creationDateTime();

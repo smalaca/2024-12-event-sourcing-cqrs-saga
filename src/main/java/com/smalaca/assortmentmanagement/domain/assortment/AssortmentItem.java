@@ -9,11 +9,11 @@ class AssortmentItem {
         this.quantity = quantity;
     }
 
-    int price() {
+    Price price() {
         return product.price();
     }
 
-    void changePrice(int price) {
-        product.changePrice(price);
+    void change(Price price) {
+        product.change(price);
     }
 }

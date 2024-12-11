@@ -46,7 +46,8 @@ public class Assortment {
     }
 
     public void listen(ProductAddedEvent event) {
-        Product product = new Product(event.productId(), event.productIdentifier(), event.name(), event.price());
+        Price price = Price.of(event.price());
+        Product product = new Product(event.productId(), event.productIdentifier(), event.name(), price);
         AssortmentItem products = new AssortmentItem(product, event.quantity());
 
         this.products.put(event.productId(), products);
@@ -57,7 +58,7 @@ public class Assortment {
                 EventId.nextAfter(command.commandId()),
                 assortmentId,
                 command.productId(),
-                findItemBy(command.productId()).price(),
+                findItemBy(command.productId()).price().value(),
                 command.price()
         );
 
@@ -68,7 +69,8 @@ public class Assortment {
 
     public void listen(ProductPriceChangedEvent event) {
         AssortmentItem item = findItemBy(event.productId());
-        item.changePrice(event.newPrice());
+        Price price = Price.of(event.newPrice());
+        item.change(price);
     }
 
     private AssortmentItem findItemBy(UUID productId) {

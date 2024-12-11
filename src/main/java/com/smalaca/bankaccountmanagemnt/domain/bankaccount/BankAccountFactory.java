@@ -1,7 +1,7 @@
 package com.smalaca.bankaccountmanagemnt.domain.bankaccount;
 
 import com.smalaca.bankaccountmanagemnt.domain.bankaccount.command.CreateBankAccountCommand;
-import com.smalaca.bankaccountmanagemnt.domain.bankaccount.event.BankAccountCreated;
+import com.smalaca.bankaccountmanagemnt.domain.bankaccount.event.BankAccountCreatedEvent;
 import com.smalaca.bankaccountmanagemnt.domain.eventid.EventId;
 import net.datafaker.Faker;
 
@@ -12,8 +12,8 @@ public class BankAccountFactory {
     private static final Faker FAKER = new Faker();
 
 
-    public BankAccountCreated create(CreateBankAccountCommand command) {
-        return new BankAccountCreated(
+    public BankAccountCreatedEvent create(CreateBankAccountCommand command) {
+        return new BankAccountCreatedEvent(
                 EventId.nextAfter(command.commandId()),
                 bankAccountId(),
                 command.ownerId(),

@@ -1,12 +1,12 @@
-package com.smalaca.bankaccountmanagemnt.domain.bankaccount.event;
+package com.smalaca.bankaccountmanagemnt.domain.bankaccount;
 
-import com.smalaca.bankaccountmanagemnt.domain.bankaccount.BankAccount;
+import com.smalaca.bankaccountmanagemnt.domain.bankaccount.event.BankAccountEvent;
 import com.smalaca.bankaccountmanagemnt.domain.eventid.EventId;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public record MoneyDeposited(EventId eventId, UUID bankAccountId, int balance, int deposit, int previousBalance) implements BankAccountEvent {
+public record NotEnoughMoneyRecognizedEvent(EventId eventId, UUID bankAccountId, int currentBalance, int withdrawal) implements BankAccountEvent {
     @Override
     public LocalDateTime creationDateTime() {
         return eventId.creationDateTime();

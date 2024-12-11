@@ -6,8 +6,10 @@ import com.smalaca.bankaccountmanagemnt.domain.bankaccount.BankAccountFactory;
 import com.smalaca.bankaccountmanagemnt.domain.bankaccount.BankAccountRepository;
 import com.smalaca.bankaccountmanagemnt.domain.bankaccount.command.CreateBankAccountCommand;
 import com.smalaca.bankaccountmanagemnt.domain.bankaccount.command.DepositMoneyCommand;
-import com.smalaca.bankaccountmanagemnt.domain.bankaccount.event.BankAccountCreated;
-import com.smalaca.bankaccountmanagemnt.domain.bankaccount.event.MoneyDeposited;
+import com.smalaca.bankaccountmanagemnt.domain.bankaccount.command.WithdrawMoneyCommand;
+import com.smalaca.bankaccountmanagemnt.domain.bankaccount.event.BankAccountCreatedEvent;
+import com.smalaca.bankaccountmanagemnt.domain.bankaccount.event.BankAccountEvent;
+import com.smalaca.bankaccountmanagemnt.domain.bankaccount.event.MoneyDepositedEvent;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -27,7 +29,7 @@ public class BankAccountService {
 
 
         // interakcja z agregatem - 1
-        BankAccountCreated event = new BankAccountFactory().create(command);
+        BankAccountCreatedEvent event = new BankAccountFactory().create(command);
 
         // publikacja zdarzenia - 1
         eventRegistry.publish(event);
@@ -37,7 +39,15 @@ public class BankAccountService {
     public void handle(DepositMoneyCommand command) {
         BankAccount bankAccount = bankAccountRepository.findBy(command.bankAccountId());
 
-        MoneyDeposited event = bankAccount.deposit(command);
+        MoneyDepositedEvent event = bankAccount.deposit(command);
+
+        eventRegistry.publish(event);
+    }
+
+    public void handle(WithdrawMoneyCommand command) {
+        BankAccount bankAccount = bankAccountRepository.findBy(command.bankAccountId());
+
+        BankAccountEvent event = bankAccount.withdraw(command);
 
         eventRegistry.publish(event);
     }

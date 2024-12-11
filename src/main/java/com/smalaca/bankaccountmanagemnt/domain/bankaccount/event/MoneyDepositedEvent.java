@@ -6,7 +6,7 @@ import com.smalaca.bankaccountmanagemnt.domain.eventid.EventId;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public record BankAccountCreated(EventId eventId, UUID bankAccountId, UUID ownerId, String accountNumber, int balance) implements BankAccountEvent {
+public record MoneyDepositedEvent(EventId eventId, UUID bankAccountId, int balance, int deposit, int previousBalance) implements BankAccountEvent {
     @Override
     public LocalDateTime creationDateTime() {
         return eventId.creationDateTime();

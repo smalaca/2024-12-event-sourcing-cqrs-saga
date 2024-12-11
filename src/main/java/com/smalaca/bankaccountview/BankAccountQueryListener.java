@@ -1,7 +1,7 @@
 package com.smalaca.bankaccountview;
 
-import com.smalaca.bankaccountmanagemnt.infrastructure.api.event.inmemory.bankaccount.BankAccountCreatedExternalEvent;
-import com.smalaca.bankaccountmanagemnt.infrastructure.api.event.inmemory.bankaccount.BankAccountModifiedExternalEvent;
+import com.smalaca.bankaccountmanagemnt.infrastructure.api.event.inmemory.bankaccount.BankAccountOpenedExternalEvent;
+import com.smalaca.bankaccountmanagemnt.infrastructure.api.event.inmemory.bankaccount.TransactionMadeExternalEvent;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -14,23 +14,25 @@ public class BankAccountQueryListener {
         this.repository = repository;
     }
 
-    public void listen(BankAccountCreatedExternalEvent event) {
+    public void listen(BankAccountOpenedExternalEvent event) {
         BankAccountDataModel bankAccount = getOrCreate(event.bankAccountId());
         bankAccount.setOwnerId(event.ownerId());
         bankAccount.setAccountNumber(event.accountNumber());
 
         if (bankAccount.isOlderThan(event.publicationDateTime())) {
             bankAccount.setBalance(event.balance());
+            bankAccount.setLastUpdateDateTime(event.publicationDateTime());
         }
 
         repository.save(bankAccount);
     }
 
-    public void listen(BankAccountModifiedExternalEvent event) {
+    public void listen(TransactionMadeExternalEvent event) {
         BankAccountDataModel bankAccount = getOrCreate(event.bankAccountId());
 
         if (bankAccount.isOlderThan(event.publicationDateTime())) {
             bankAccount.setBalance(event.balance());
+            bankAccount.setLastUpdateDateTime(event.publicationDateTime());
             repository.save(bankAccount);
         }
     }

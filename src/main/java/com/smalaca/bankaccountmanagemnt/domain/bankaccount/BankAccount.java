@@ -2,7 +2,7 @@ package com.smalaca.bankaccountmanagemnt.domain.bankaccount;
 
 import com.smalaca.bankaccountmanagemnt.domain.bankaccount.command.DepositMoneyCommand;
 import com.smalaca.bankaccountmanagemnt.domain.bankaccount.command.WithdrawMoneyCommand;
-import com.smalaca.bankaccountmanagemnt.domain.bankaccount.event.BankAccountCreatedEvent;
+import com.smalaca.bankaccountmanagemnt.domain.bankaccount.event.BankAccountOpenedEvent;
 import com.smalaca.bankaccountmanagemnt.domain.bankaccount.event.BankAccountEvent;
 import com.smalaca.bankaccountmanagemnt.domain.bankaccount.event.MoneyDepositedEvent;
 import com.smalaca.bankaccountmanagemnt.domain.bankaccount.event.MoneyWithdrawnEvent;
@@ -19,7 +19,7 @@ public class BankAccount {
     private String accountNumber;
     private int balance;
 
-    public void listen(BankAccountCreatedEvent event) {
+    public void listen(BankAccountOpenedEvent event) {
         bankAccountId = event.bankAccountId();
         ownerId = event.ownerId();
         accountNumber = event.accountNumber();
@@ -40,10 +40,6 @@ public class BankAccount {
         );
         listen(event);
         return event;
-    }
-
-    public BankAccountDto asDto() {
-        return new BankAccountDto(bankAccountId, ownerId, accountNumber, balance);
     }
 
     public BankAccountEvent withdraw(WithdrawMoneyCommand command) {

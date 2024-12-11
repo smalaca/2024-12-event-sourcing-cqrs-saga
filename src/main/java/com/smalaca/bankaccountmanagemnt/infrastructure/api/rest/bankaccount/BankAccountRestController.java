@@ -1,9 +1,9 @@
 package com.smalaca.bankaccountmanagemnt.infrastructure.api.rest.bankaccount;
 
 import com.smalaca.bankaccountmanagemnt.application.bankaccount.BankAccountService;
-import com.smalaca.bankaccountmanagemnt.domain.bankaccount.BankAccountDto;
 import com.smalaca.bankaccountmanagemnt.domain.bankaccount.command.CreateBankAccountCommand;
 import com.smalaca.bankaccountmanagemnt.domain.bankaccount.command.DepositMoneyCommand;
+import com.smalaca.bankaccountmanagemnt.domain.bankaccount.command.WithdrawMoneyCommand;
 import com.smalaca.bankaccountmanagemnt.domain.bankaccount.event.BankAccountEvent;
 import com.smalaca.bankaccountmanagemnt.infrastructure.repository.inmemory.bankaccount.InMemoryBankAccountRepository;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,6 +39,11 @@ public class BankAccountRestController {
         bankAccountService.handle(command);
     }
 
+    @PutMapping("withdraw")
+    public void withdraw(@RequestBody WithdrawMoneyCommand command) {
+        bankAccountService.handle(command);
+    }
+
     @GetMapping("events")
     public Map<UUID, List<BankAccountEvent>> allEvents() {
         return repository.findAll();
@@ -47,10 +52,5 @@ public class BankAccountRestController {
     @GetMapping("events/{bankAccountId}")
     public List<BankAccountEvent> allEventsForBankAccount(@PathVariable UUID bankAccountId) {
         return repository.findAllFor(bankAccountId);
-    }
-
-    @GetMapping("{bankAccountId}")
-    public BankAccountDto findById(@PathVariable UUID bankAccountId) {
-        return repository.findBy(bankAccountId).asDto();
     }
 }

@@ -7,7 +7,7 @@ import com.smalaca.bankaccountmanagemnt.domain.bankaccount.BankAccountRepository
 import com.smalaca.bankaccountmanagemnt.domain.bankaccount.command.CreateBankAccountCommand;
 import com.smalaca.bankaccountmanagemnt.domain.bankaccount.command.DepositMoneyCommand;
 import com.smalaca.bankaccountmanagemnt.domain.bankaccount.command.WithdrawMoneyCommand;
-import com.smalaca.bankaccountmanagemnt.domain.bankaccount.event.BankAccountCreatedEvent;
+import com.smalaca.bankaccountmanagemnt.domain.bankaccount.event.BankAccountOpenedEvent;
 import com.smalaca.bankaccountmanagemnt.domain.bankaccount.event.BankAccountEvent;
 import com.smalaca.bankaccountmanagemnt.domain.bankaccount.event.MoneyDepositedEvent;
 import org.springframework.stereotype.Service;
@@ -29,7 +29,7 @@ public class BankAccountService {
 
 
         // interakcja z agregatem - 1
-        BankAccountCreatedEvent event = new BankAccountFactory().create(command);
+        BankAccountOpenedEvent event = new BankAccountFactory().create(command);
 
         // publikacja zdarzenia - 1
         eventRegistry.publish(event);

@@ -1,6 +1,6 @@
 package com.smalaca.bankaccountmanagemnt.infrastructure.api.event.inmemory.bankaccount;
 
-import com.smalaca.bankaccountmanagemnt.domain.bankaccount.event.BankAccountCreatedEvent;
+import com.smalaca.bankaccountmanagemnt.domain.bankaccount.event.BankAccountOpenedEvent;
 import com.smalaca.bankaccountmanagemnt.domain.bankaccount.event.BankAccountEvent;
 import com.smalaca.bankaccountmanagemnt.domain.bankaccount.event.MoneyDepositedEvent;
 import com.smalaca.bankaccountmanagemnt.domain.bankaccount.event.MoneyWithdrawnEvent;
@@ -16,18 +16,18 @@ public class BankAccountEventPublisher {
     }
 
     public void listen(BankAccountEvent event) {
-        if (event instanceof BankAccountCreatedEvent) {
-            BankAccountCreatedExternalEvent externalEvent = BankAccountCreatedExternalEvent.create((BankAccountCreatedEvent) event);
+        if (event instanceof BankAccountOpenedEvent) {
+            BankAccountOpenedExternalEvent externalEvent = BankAccountOpenedExternalEvent.create((BankAccountOpenedEvent) event);
             System.out.println(externalEvent);
             bankAccountQueryListener.listen(externalEvent);
 
         } else if (event instanceof MoneyDepositedEvent) {
-            BankAccountModifiedExternalEvent externalEvent = BankAccountModifiedExternalEvent.create((MoneyDepositedEvent) event);
+            TransactionMadeExternalEvent externalEvent = TransactionMadeExternalEvent.create((MoneyDepositedEvent) event);
             System.out.println(externalEvent);
             bankAccountQueryListener.listen(externalEvent);
 
         } else if (event instanceof MoneyWithdrawnEvent) {
-            BankAccountModifiedExternalEvent externalEvent = BankAccountModifiedExternalEvent.create((MoneyWithdrawnEvent) event);
+            TransactionMadeExternalEvent externalEvent = TransactionMadeExternalEvent.create((MoneyWithdrawnEvent) event);
             System.out.println(externalEvent);
             bankAccountQueryListener.listen(externalEvent);
         }

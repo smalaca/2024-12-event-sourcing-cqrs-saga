@@ -19,6 +19,6 @@ class BankAccountDataModelRepository {
     }
 
     boolean doesNotExist(UUID bankAccountId) {
-        return bankAccounts.containsKey(bankAccountId);
+        return !bankAccounts.containsKey(bankAccountId);
     }
 }

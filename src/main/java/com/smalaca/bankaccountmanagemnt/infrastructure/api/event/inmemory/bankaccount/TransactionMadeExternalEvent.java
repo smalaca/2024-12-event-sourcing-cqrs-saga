@@ -7,14 +7,14 @@ import com.smalaca.bankaccountmanagemnt.domain.eventid.EventId;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public record BankAccountModifiedExternalEvent(EventId eventId, LocalDateTime publicationDateTime, UUID bankAccountId, int balance) {
-    static BankAccountModifiedExternalEvent create(MoneyDepositedEvent event) {
-        return new BankAccountModifiedExternalEvent(
+public record TransactionMadeExternalEvent(EventId eventId, LocalDateTime publicationDateTime, UUID bankAccountId, int balance) {
+    static TransactionMadeExternalEvent create(MoneyDepositedEvent event) {
+        return new TransactionMadeExternalEvent(
                 event.eventId().next(), event.creationDateTime(), event.bankAccountId(), event.balance());
     }
 
-    static BankAccountModifiedExternalEvent create(MoneyWithdrawnEvent event) {
-        return new BankAccountModifiedExternalEvent(
+    static TransactionMadeExternalEvent create(MoneyWithdrawnEvent event) {
+        return new TransactionMadeExternalEvent(
                 event.eventId().next(), event.creationDateTime(), event.bankAccountId(), event.balance());
     }
 }

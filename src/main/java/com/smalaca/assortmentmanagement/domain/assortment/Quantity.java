@@ -13,4 +13,12 @@ class Quantity {
         }
         return new Quantity(value);
     }
+
+    boolean isNotLowerThan(Quantity quantity) {
+        return value >= quantity.value;
+    }
+
+    Quantity reducedBy(Quantity quantity) {
+        return Quantity.of(value - quantity.value);
+    }
 }

@@ -7,6 +7,7 @@ import com.smalaca.assortmentmanagement.domain.assortment.AssortmentRepository;
 import com.smalaca.assortmentmanagement.domain.assortment.command.AddAssortmentCommand;
 import com.smalaca.assortmentmanagement.domain.assortment.command.AddProductCommand;
 import com.smalaca.assortmentmanagement.domain.assortment.command.ChangeProductPriceCommand;
+import com.smalaca.assortmentmanagement.domain.assortment.command.SellProductCommand;
 import com.smalaca.assortmentmanagement.domain.assortment.event.AssortmentAdded;
 import com.smalaca.assortmentmanagement.domain.assortment.event.AssortmentEvent;
 import com.smalaca.assortmentmanagement.domain.assortment.event.ProductPriceChangedEvent;
@@ -50,6 +51,14 @@ public class AssortmentService {
         Assortment assortment = assortmentRepository.findBy(command.assortmentId());
 
         ProductPriceChangedEvent event = assortment.changeProductPrice(command);
+
+        eventRegistry.publish(event);
+    }
+
+    public void handle(SellProductCommand command) {
+        Assortment assortment = assortmentRepository.findBy(command.assortmentId());
+
+        AssortmentEvent event = assortment.sellProduct(command);
 
         eventRegistry.publish(event);
     }

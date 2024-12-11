@@ -2,10 +2,13 @@ package com.smalaca.assortmentmanagement.domain.assortment;
 
 import com.smalaca.assortmentmanagement.domain.assortment.command.AddProductCommand;
 import com.smalaca.assortmentmanagement.domain.assortment.command.ChangeProductPriceCommand;
+import com.smalaca.assortmentmanagement.domain.assortment.command.SellProductCommand;
 import com.smalaca.assortmentmanagement.domain.assortment.event.AssortmentAdded;
 import com.smalaca.assortmentmanagement.domain.assortment.event.AssortmentEvent;
 import com.smalaca.assortmentmanagement.domain.assortment.event.ProductAddedEvent;
+import com.smalaca.assortmentmanagement.domain.assortment.event.ProductNotFoundEvent;
 import com.smalaca.assortmentmanagement.domain.assortment.event.ProductPriceChangedEvent;
+import com.smalaca.assortmentmanagement.domain.assortment.event.ProductSoldEvent;
 import com.smalaca.assortmentmanagement.domain.assortment.event.UnsupportedProductRecognizedEvent;
 import com.smalaca.assortmentmanagement.domain.eventid.EventId;
 import com.smalaca.assortmentmanagement.domain.productsupport.ProductSupportService;
@@ -92,5 +95,40 @@ public class Assortment {
 
     public void listen(UnsupportedProductRecognizedEvent event) {
 
+    }
+
+    public AssortmentEvent sellProduct(SellProductCommand command) {
+        if (hasEnoughProduct(command)) {
+            ProductSoldEvent event = new ProductSoldEvent(
+                    EventId.nextAfter(command.commandId()),
+                    assortmentId,
+                    command.productId(),
+                    command.quantity());
+            listen(event);
+            return event;
+        } else {
+            ProductNotFoundEvent event = new ProductNotFoundEvent(
+                    EventId.nextAfter(command.commandId()),
+                    assortmentId,
+                    command.productId(),
+                    command.quantity());
+            listen(event);
+            return event;
+        }
+    }
+
+    public void listen(ProductSoldEvent event) {
+        AssortmentItem item = findItemBy(event.productId());
+        Quantity quantity = Quantity.of(event.quantity());
+        item.sell(quantity);
+    }
+
+    public void listen(ProductNotFoundEvent event) {
+
+    }
+
+    private boolean hasEnoughProduct(SellProductCommand command) {
+        Quantity quantity = Quantity.of(command.quantity());
+        return findItemBy(command.productId()).hasNotLessThan(quantity);
     }
 }

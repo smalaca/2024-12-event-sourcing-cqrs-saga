@@ -1,6 +1,6 @@
 package com.smalaca.bankaccountcommand.domain.bankaccount.command;
 
-import com.smalaca.bankaccountcommand.domain.commandid.CommandId;
+import com.smalaca.sharedkernel.commandid.CommandId;
 
 import java.util.UUID;
 

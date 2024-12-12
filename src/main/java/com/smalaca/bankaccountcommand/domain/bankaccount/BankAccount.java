@@ -7,7 +7,7 @@ import com.smalaca.bankaccountcommand.domain.bankaccount.event.BankAccountEvent;
 import com.smalaca.bankaccountcommand.domain.bankaccount.event.MoneyDepositedEvent;
 import com.smalaca.bankaccountcommand.domain.bankaccount.event.MoneyWithdrawnEvent;
 import com.smalaca.bankaccountcommand.domain.bankaccount.event.NotEnoughMoneyRecognizedEvent;
-import com.smalaca.bankaccountcommand.domain.eventid.EventId;
+import com.smalaca.sharedkernel.eventid.EventId;
 
 import java.util.UUID;
 
@@ -32,7 +32,7 @@ public class BankAccount {
 
     public MoneyDepositedEvent deposit(DepositMoneyCommand command) {
         MoneyDepositedEvent event = new MoneyDepositedEvent(
-                EventId.nextAfter(command.commandId()),
+                EventId.next(command.commandId()),
                 bankAccountId,
                 balance + command.deposit(),
                 command.deposit(),
@@ -45,7 +45,7 @@ public class BankAccount {
     public BankAccountEvent withdraw(WithdrawMoneyCommand command) {
         if(balance > command.withdrawal()) {
             MoneyWithdrawnEvent event = new MoneyWithdrawnEvent(
-                    EventId.nextAfter(command.commandId()),
+                    EventId.next(command.commandId()),
                     bankAccountId,
                     balance - command.withdrawal(),
                     command.withdrawal(),
@@ -54,7 +54,7 @@ public class BankAccount {
             return event;
         } else {
             NotEnoughMoneyRecognizedEvent event = new NotEnoughMoneyRecognizedEvent(
-                    EventId.nextAfter(command.commandId()),
+                    EventId.next(command.commandId()),
                     bankAccountId,
                     balance,
                     command.withdrawal());

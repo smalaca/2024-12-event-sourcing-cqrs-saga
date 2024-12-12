@@ -2,7 +2,7 @@ package com.smalaca.bankaccountcommand.infrastructure.api.event.inmemory.bankacc
 
 import com.smalaca.bankaccountcommand.domain.bankaccount.event.MoneyDepositedEvent;
 import com.smalaca.bankaccountcommand.domain.bankaccount.event.MoneyWithdrawnEvent;
-import com.smalaca.bankaccountcommand.domain.eventid.EventId;
+import com.smalaca.sharedkernel.eventid.EventId;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

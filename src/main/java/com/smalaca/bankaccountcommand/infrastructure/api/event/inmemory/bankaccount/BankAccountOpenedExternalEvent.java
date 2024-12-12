@@ -1,7 +1,7 @@
 package com.smalaca.bankaccountcommand.infrastructure.api.event.inmemory.bankaccount;
 
 import com.smalaca.bankaccountcommand.domain.bankaccount.event.BankAccountOpenedEvent;
-import com.smalaca.bankaccountcommand.domain.eventid.EventId;
+import com.smalaca.sharedkernel.eventid.EventId;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

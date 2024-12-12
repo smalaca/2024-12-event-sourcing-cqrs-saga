@@ -2,7 +2,7 @@ package com.smalaca.bankaccountcommand.domain.bankaccount;
 
 import com.smalaca.bankaccountcommand.domain.bankaccount.command.CreateBankAccountCommand;
 import com.smalaca.bankaccountcommand.domain.bankaccount.event.BankAccountOpenedEvent;
-import com.smalaca.bankaccountcommand.domain.eventid.EventId;
+import com.smalaca.sharedkernel.eventid.EventId;
 import net.datafaker.Faker;
 
 import java.util.UUID;
@@ -14,7 +14,7 @@ public class BankAccountFactory {
 
     public BankAccountOpenedEvent create(CreateBankAccountCommand command) {
         return new BankAccountOpenedEvent(
-                EventId.nextAfter(command.commandId()),
+                EventId.next(command.commandId()),
                 bankAccountId(),
                 command.ownerId(),
                 accountNumber(),

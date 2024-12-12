@@ -1,6 +1,6 @@
 package com.smalaca.assortmentquery;
 
-import com.smalaca.assortmentmanagement.infrastructure.api.event.inmemory.assortment.AssortmentAddedExternalEvent;
+import com.smalaca.assortmentmanagementcommand.infrastructure.api.event.inmemory.assortment.AssortmentAddedExternalEvent;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;

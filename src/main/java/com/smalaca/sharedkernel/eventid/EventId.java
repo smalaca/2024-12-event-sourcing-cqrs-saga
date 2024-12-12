@@ -1,6 +1,6 @@
-package com.smalaca.assortmentmanagementcommand.domain.eventid;
+package com.smalaca.sharedkernel.eventid;
 
-import com.smalaca.assortmentmanagementcommand.domain.commandid.CommandId;
+import com.smalaca.sharedkernel.commandid.CommandId;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

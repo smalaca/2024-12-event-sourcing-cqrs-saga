@@ -1,4 +1,4 @@
-package com.smalaca.assortmentmanagementcommand.domain.commandid;
+package com.smalaca.sharedkernel.commandid;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

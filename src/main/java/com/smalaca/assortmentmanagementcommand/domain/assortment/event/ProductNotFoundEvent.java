@@ -2,7 +2,7 @@ package com.smalaca.assortmentmanagementcommand.domain.assortment.event;
 
 import com.smalaca.assortmentmanagementcommand.domain.assortment.Assortment;
 import com.smalaca.assortmentmanagementcommand.domain.assortment.command.SellProductCommand;
-import com.smalaca.assortmentmanagementcommand.domain.eventid.EventId;
+import com.smalaca.sharedkernel.eventid.EventId;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

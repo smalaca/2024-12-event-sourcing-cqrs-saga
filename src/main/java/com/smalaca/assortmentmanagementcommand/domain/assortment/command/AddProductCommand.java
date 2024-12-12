@@ -1,6 +1,6 @@
 package com.smalaca.assortmentmanagementcommand.domain.assortment.command;
 
-import com.smalaca.assortmentmanagementcommand.domain.commandid.CommandId;
+import com.smalaca.sharedkernel.commandid.CommandId;
 
 import java.util.UUID;
 

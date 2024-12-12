@@ -10,7 +10,7 @@ import com.smalaca.assortmentmanagementcommand.domain.assortment.event.ProductNo
 import com.smalaca.assortmentmanagementcommand.domain.assortment.event.ProductPriceChangedEvent;
 import com.smalaca.assortmentmanagementcommand.domain.assortment.event.ProductSoldEvent;
 import com.smalaca.assortmentmanagementcommand.domain.assortment.event.UnsupportedProductRecognizedEvent;
-import com.smalaca.assortmentmanagementcommand.domain.eventid.EventId;
+import com.smalaca.sharedkernel.eventid.EventId;
 import com.smalaca.assortmentmanagementcommand.domain.productsupport.ProductSupportService;
 
 import java.util.HashMap;

@@ -2,7 +2,7 @@ package com.smalaca.assortmentmanagementcommand.domain.assortment;
 
 import com.smalaca.assortmentmanagementcommand.domain.assortment.command.AddAssortmentCommand;
 import com.smalaca.assortmentmanagementcommand.domain.assortment.event.AssortmentAddedEvent;
-import com.smalaca.assortmentmanagementcommand.domain.eventid.EventId;
+import com.smalaca.sharedkernel.eventid.EventId;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;

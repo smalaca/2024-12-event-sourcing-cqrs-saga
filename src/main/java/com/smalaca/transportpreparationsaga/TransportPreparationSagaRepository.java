@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.UUID;
 
 @Repository
-public class TransportPreparationSagaRepository {
+class TransportPreparationSagaRepository {
     private final Map<UUID, TransportPreparationSaga> sagas = new HashMap<>();
 
     void save(TransportPreparationSaga saga) {
@@ -16,5 +16,9 @@ public class TransportPreparationSagaRepository {
 
     void delete(TransportPreparationSaga saga) {
         sagas.remove(saga.getSagaId());
+    }
+
+    TransportPreparationSaga findById(UUID sagaId) {
+        return sagas.get(sagaId);
     }
 }

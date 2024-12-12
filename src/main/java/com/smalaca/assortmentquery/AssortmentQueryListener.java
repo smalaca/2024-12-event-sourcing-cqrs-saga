@@ -31,6 +31,7 @@ public class AssortmentQueryListener {
         AssortmentDataModel assortment = getOrCreate(event.assortmentId());
 
         if (assortment.isOlderThan(event.version())) {
+//            assortment.setQuantityFor(event.productId(), event.quantity());
             assortment.setLastUpdateAt(event.version());
         }
 

@@ -1,4 +1,4 @@
-package com.smalaca.bankaccountcommand.infrastructure.eventregistry.inmemory;
+package com.smalaca.bankaccountcommand.infrastructure.api.event.inmemory.bankaccount;
 
 import com.smalaca.bankaccountcommand.domain.bankaccount.event.NotEnoughMoneyRecognizedEvent;
 import com.smalaca.bankaccountcommand.domain.eventid.EventId;

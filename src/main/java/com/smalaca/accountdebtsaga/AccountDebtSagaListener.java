@@ -1,6 +1,6 @@
 package com.smalaca.accountdebtsaga;
 
-import com.smalaca.bankaccountcommand.infrastructure.eventregistry.inmemory.NotEnoughMoneyRecognizedPivotalEvent;
+import com.smalaca.bankaccountcommand.infrastructure.api.event.inmemory.bankaccount.NotEnoughMoneyRecognizedPivotalEvent;
 import org.springframework.stereotype.Component;
 
 @Component

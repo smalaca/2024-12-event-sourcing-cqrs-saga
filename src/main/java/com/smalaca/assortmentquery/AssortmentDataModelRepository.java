@@ -15,7 +15,7 @@ public class AssortmentDataModelRepository {
     }
 
     void save(AssortmentDataModel assortment) {
-        assortments.put(assortment.getAssortmentId(), assortment);
+        assortments.put(assortment.getSaleId(), assortment);
     }
 
     AssortmentDataModel findById(UUID assortmentId) {

@@ -10,7 +10,7 @@ public class AssortmentDataModel {
     private String name;
     private String description;
 
-    public UUID getAssortmentId() {
+    public UUID getSaleId() {
         return assortmentId;
     }
 

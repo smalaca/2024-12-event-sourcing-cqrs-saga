@@ -70,4 +70,8 @@ public class BankAccount {
     public void listen(MoneyWithdrawnEvent event) {
         balance -= event.withdrawal();
     }
+
+    public BankAccountDto asDto() {
+        return new BankAccountDto(bankAccountId, ownerId);
+    }
 }

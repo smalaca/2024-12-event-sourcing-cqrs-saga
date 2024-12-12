@@ -8,7 +8,7 @@ import com.smalaca.assortmentmanagement.domain.assortment.command.AddAssortmentC
 import com.smalaca.assortmentmanagement.domain.assortment.command.AddProductCommand;
 import com.smalaca.assortmentmanagement.domain.assortment.command.ChangeProductPriceCommand;
 import com.smalaca.assortmentmanagement.domain.assortment.command.SellProductCommand;
-import com.smalaca.assortmentmanagement.domain.assortment.event.AssortmentAdded;
+import com.smalaca.assortmentmanagement.domain.assortment.event.AssortmentAddedEvent;
 import com.smalaca.assortmentmanagement.domain.assortment.event.AssortmentEvent;
 import com.smalaca.assortmentmanagement.domain.assortment.event.ProductPriceChangedEvent;
 import com.smalaca.assortmentmanagement.domain.productsupport.ProductSupportService;
@@ -33,7 +33,7 @@ public class AssortmentService {
     }
 
     public UUID handle(AddAssortmentCommand command) {
-        AssortmentAdded event = factory.create(command);
+        AssortmentAddedEvent event = factory.create(command);
 
         eventRegistry.publish(event);
         return event.assortmentId();

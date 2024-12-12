@@ -3,7 +3,7 @@ package com.smalaca.assortmentmanagement.domain.assortment;
 import com.smalaca.assortmentmanagement.domain.assortment.command.AddProductCommand;
 import com.smalaca.assortmentmanagement.domain.assortment.command.ChangeProductPriceCommand;
 import com.smalaca.assortmentmanagement.domain.assortment.command.SellProductCommand;
-import com.smalaca.assortmentmanagement.domain.assortment.event.AssortmentAdded;
+import com.smalaca.assortmentmanagement.domain.assortment.event.AssortmentAddedEvent;
 import com.smalaca.assortmentmanagement.domain.assortment.event.AssortmentEvent;
 import com.smalaca.assortmentmanagement.domain.assortment.event.ProductAddedEvent;
 import com.smalaca.assortmentmanagement.domain.assortment.event.ProductNotFoundEvent;
@@ -24,7 +24,7 @@ public class Assortment {
     private String description;
     private Map<UUID, AssortmentItem> products = new HashMap<>();
 
-    public void listen(AssortmentAdded event) {
+    public void listen(AssortmentAddedEvent event) {
         assortmentId = event.assortmentId();
         sellerId = event.sellerId();
         name = event.name();

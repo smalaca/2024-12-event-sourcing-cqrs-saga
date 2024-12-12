@@ -1,7 +1,7 @@
 package com.smalaca.assortmentmanagement.domain.assortment;
 
 import com.smalaca.assortmentmanagement.domain.assortment.command.AddAssortmentCommand;
-import com.smalaca.assortmentmanagement.domain.assortment.event.AssortmentAdded;
+import com.smalaca.assortmentmanagement.domain.assortment.event.AssortmentAddedEvent;
 import com.smalaca.assortmentmanagement.domain.eventid.EventId;
 import org.springframework.stereotype.Component;
 
@@ -15,8 +15,8 @@ public class AssortmentFactory {
         this.repository = repository;
     }
 
-    public AssortmentAdded create(AddAssortmentCommand command) {
-        return new AssortmentAdded(
+    public AssortmentAddedEvent create(AddAssortmentCommand command) {
+        return new AssortmentAddedEvent(
                 EventId.nextAfter(command.commandId()),
                 assortmentId(),
                 command.sellerId(),

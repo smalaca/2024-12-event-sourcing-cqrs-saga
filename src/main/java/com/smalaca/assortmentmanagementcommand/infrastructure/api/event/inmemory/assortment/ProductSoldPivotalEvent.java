@@ -6,10 +6,10 @@ import com.smalaca.assortmentmanagementcommand.domain.eventid.EventId;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public record ProductSoldExternalEvent(
+public record ProductSoldPivotalEvent(
         EventId eventId, LocalDateTime version, UUID assortmentId, UUID productId, int quantity) {
-    static ProductSoldExternalEvent create(ProductSoldEvent event) {
-        return new ProductSoldExternalEvent(
+    static ProductSoldPivotalEvent create(ProductSoldEvent event) {
+        return new ProductSoldPivotalEvent(
                 event.eventId().next(),
                 event.creationDateTime(),
                 event.assortmentId(),

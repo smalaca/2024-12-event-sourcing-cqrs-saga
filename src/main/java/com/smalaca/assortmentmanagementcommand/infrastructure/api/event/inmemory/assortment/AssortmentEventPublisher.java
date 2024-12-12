@@ -22,7 +22,7 @@ public class AssortmentEventPublisher {
             AssortmentAddedExternalEvent externalEvent = AssortmentAddedExternalEvent.create((AssortmentAddedEvent) event);
             assortmentQueryListener.listen(externalEvent);
         } else if (event instanceof ProductSoldEvent) {
-            ProductSoldExternalEvent externalEvent = ProductSoldExternalEvent.create((ProductSoldEvent) event);
+            ProductSoldPivotalEvent externalEvent = ProductSoldPivotalEvent.create((ProductSoldEvent) event);
             salesHistoryQueryListener.listen(externalEvent);
         }
     }

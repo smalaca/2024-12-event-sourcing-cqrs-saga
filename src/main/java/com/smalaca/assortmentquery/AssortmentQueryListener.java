@@ -1,7 +1,7 @@
 package com.smalaca.assortmentquery;
 
 import com.smalaca.assortmentmanagementcommand.infrastructure.api.event.inmemory.assortment.AssortmentAddedExternalEvent;
-import com.smalaca.assortmentmanagementcommand.infrastructure.api.event.inmemory.assortment.ProductSoldExternalEvent;
+import com.smalaca.assortmentmanagementcommand.infrastructure.api.event.inmemory.assortment.ProductSoldPivotalEvent;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
@@ -27,7 +27,7 @@ public class AssortmentQueryListener {
         repository.save(assortment);
     }
 
-    public void listen(ProductSoldExternalEvent event) {
+    public void listen(ProductSoldPivotalEvent event) {
         AssortmentDataModel assortment = getOrCreate(event.assortmentId());
 
         if (assortment.isOlderThan(event.version())) {

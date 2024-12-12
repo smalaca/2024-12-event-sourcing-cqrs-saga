@@ -1,6 +1,6 @@
 package com.smalaca.salehistoryquery;
 
-import com.smalaca.assortmentmanagementcommand.infrastructure.api.event.inmemory.assortment.ProductSoldExternalEvent;
+import com.smalaca.assortmentmanagementcommand.infrastructure.api.event.inmemory.assortment.ProductSoldPivotalEvent;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -11,7 +11,7 @@ public class SalesHistoryQueryListener {
         this.repository = repository;
     }
 
-    public void listen(ProductSoldExternalEvent event) {
+    public void listen(ProductSoldPivotalEvent event) {
         SaleDataModel sale = new SaleDataModel();
         sale.setSaleId(saleId(event));
         sale.setAssortmentId(event.assortmentId());
@@ -21,7 +21,7 @@ public class SalesHistoryQueryListener {
         repository.save(sale);
     }
 
-    private String saleId(ProductSoldExternalEvent event) {
+    private String saleId(ProductSoldPivotalEvent event) {
         return event.assortmentId() + event.version().toString();
     }
 }
